@@ -84,7 +84,7 @@ Sets appropriate permissions for the **storage** and **cache** directories to al
 ## 🌍 Accessing the Application
 Once the setup is complete, you can access the application via:
 
-- 🖥️ **On Host Machine:** [http://<guestip>:8000](http://<guestip>:8000)
+
 - 🖧 **On Guest VM:** [http://schedu.site:8000](http://schedu.site:8000)
 
 ## ⚠️ Troubleshooting

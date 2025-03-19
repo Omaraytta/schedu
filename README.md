@@ -28,6 +28,7 @@ To run the project using **Docker**, follow these steps:
 ### 1️⃣ Automated Setup (Recommended)
 You can run the setup script to automate the installation and setup process:
 ```sh
+cd Schedu/
 ./setup.sh
 ```
 This will install **Docker & Docker Compose**, build the containers, install dependencies, set up the database, and configure permissions automatically.

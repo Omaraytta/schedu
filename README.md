@@ -1,1 +1,1 @@
-# schedu
+# SchedU - Academic Scheduling Platform 🎓

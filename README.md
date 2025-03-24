@@ -47,8 +47,7 @@ sudo apt-get update
 sudo apt-get install docker.io
 
 # Install Docker Compose
-sudo apt-get install docker-compose
-```
+https://www.server-world.info/en/note?os=CentOS_Stream_9&p=docker&f=7```
 
 #### 🏗️ 2.2 Build and start the containers
 ```sh

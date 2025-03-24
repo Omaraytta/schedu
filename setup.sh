@@ -7,15 +7,11 @@ trap 'echo "❌ Error occurred at command: $BASH_COMMAND"' ERR
 # Check if Docker and Docker Compose are installed
 if ! command -v docker &> /dev/null; then
     echo "❌ Docker is not installed. Please install it using:"
-    echo "   sudo apt install docker.io   # For Debian-based systems"
-    echo "   sudo yum install docker      # For RHEL-based systems"
     exit 1
 fi
 
 if ! command -v docker-compose &> /dev/null; then
     echo "❌ Docker Compose is not installed. Please install it using:"
-    echo "   sudo apt install docker-compose   # For Debian-based systems"
-    echo "   sudo yum install docker-compose   # For RHEL-based systems"
     exit 1
 fi
 

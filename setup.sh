@@ -17,13 +17,13 @@ fi
 
 # Step 1: Build and start the containers
 echo "🚀 Building and starting Docker containers..."
-docker-compose up -d --build
+docker-compose up -d --build 
 sleep 20 
 echo " waiting containers untill starts ...."
 # Step 2: Install dependencies
 echo "📦 Installing Composer dependencies..."
 docker-compose exec app composer install
-sleep 20 
+
 
 # Step 3: Generate the application key
 echo "🔑 Generating application key..."

@@ -6,10 +6,13 @@ use App\Http\Controllers\AcadmicSpaceController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\ExportController;
 use App\Http\Controllers\HallController;
 use App\Http\Controllers\LapController;
 use App\Http\Controllers\LecturerController;
 use App\Http\Controllers\ManagementRoleController;
+use App\Http\Controllers\ScheduleController;
+use App\Http\Controllers\ScheduleExportController;
 use App\Http\Controllers\StudyPlaneController;
 use App\Http\Controllers\TermPlansController;
 use Illuminate\Http\Request;
@@ -115,7 +118,27 @@ Route::middleware('auth:sanctum')->group(function () {
 
    
 });
+    Route::resource('/schedules' , ScheduleController::class);
+    Route::get('/schedule/{id}/export-pdf', [ExportController::class, 'exportPdf']);
+Route::get('/schedule/{id}/preview', [ExportController::class, 'previewSchedule']);
 
+Route::get('/schedule/pdf', [ScheduleExportController::class, 'exportPdf']);
+
+// تصدير عام (بدون تصفية)
+Route::get('/export/pdf', [ScheduleExportController::class, 'exportPdf']);
+Route::get('/export/excel', [ScheduleExportController::class, 'exportExcel']);
+
+// تصدير جدول محاضر معين
+Route::get('/export/pdf/lecturer/{id}', [ScheduleExportController::class, 'exportPdfLecturer']);
+Route::get('/export/excel/lecturer/{id}', [ScheduleExportController::class, 'exportExcelLecturer']);
+
+// تصدير جدول قاعة معينة
+Route::get('/export/pdf/hall/{id}', [ScheduleExportController::class, 'exportPdfHall']);
+Route::get('/export/excel/hall/{id}', [ScheduleExportController::class, 'exportExcelHall']);
+
+// تصدير جدول معمل معين
+Route::get('/export/pdf/lab/{id}', [ScheduleExportController::class, 'exportPdfLab']);
+Route::get('/export/excel/lab/{id}', [ScheduleExportController::class, 'exportExcelLab']);
 
 
 

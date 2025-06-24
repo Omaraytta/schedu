@@ -13,7 +13,7 @@ use Mpdf\Config\FontVariables;
 use App\Models\ScheduleEntry;
 use App\Models\Lecturer;
 use App\Models\Hall;
-use App\Models\Lab;
+use App\Models\Lap; // تم تغيير الاسم من Lab إلى Lap
 use App\Models\Department;
 use App\Models\Schedule;
 use App\Models\Academic;
@@ -28,7 +28,7 @@ class ScheduleExportController extends Controller
             'course',
             'lecturer.academicDegree',
             'hall',
-            'lab',
+            'lap', // تم تغيير الاسم من lab إلى lap
             'department',
             'academic'
         ]);
@@ -45,8 +45,8 @@ class ScheduleExportController extends Controller
                 case 'hall':
                     $query->where('hall_id', $filterId);
                     break;
-                case 'lab':
-                    $query->where('lab_id', $filterId);
+                case 'lab': // تم تغيير الاسم هنا
+                    $query->where('lap_id', $filterId); // تم تغيير الحقل هنا
                     break;
                 case 'department':
                     $query->where('department_id', $filterId);
@@ -95,7 +95,7 @@ class ScheduleExportController extends Controller
                     'name' => $staffName,
                 ],
                 'hall' => $entry->hall ? ['name' => $entry->hall->name] : null,
-                'room' => $entry->lab ? ['name' => $entry->lab->name] : null,
+                'room' => $entry->lap ? ['name' => $entry->lap->name] : null, // تم تغيير الاسم هنا
                 'department' => ['name' => $departmentName],
                 'group_number' => $entry->group_number ?? null,
                 'total_groups' => $entry->total_groups ?? null,
@@ -257,9 +257,9 @@ class ScheduleExportController extends Controller
                     $hall = Hall::findOrFail($filterId);
                     $title = 'قاعة ' . $hall->name;
                     break;
-                case 'lab':
-                    $lab = Lab::findOrFail($filterId);
-                    $title = 'معمل ' . $lab->name;
+                case 'lab': // تم تغيير الاسم هنا
+                    $lap = Lap::findOrFail($filterId); // تم تغيير الموديل هنا
+                    $title = 'معمل ' . $lap->name;
                     break;
                 case 'department':
                     $department = Department::findOrFail($filterId);
@@ -427,9 +427,9 @@ class ScheduleExportController extends Controller
                     $hall = Hall::findOrFail($filterId);
                     $title = 'قاعة ' . $hall->name;
                     break;
-                case 'lab':
-                    $lab = Lab::findOrFail($filterId);
-                    $title = 'معمل ' . $lab->name;
+                case 'lab': // تم تغيير الاسم هنا
+                    $lap = Lap::findOrFail($filterId); // تم تغيير الموديل هنا
+                    $title = 'معمل ' . $lap->name;
                     break;
                 case 'department':
                     $department = Department::findOrFail($filterId);

@@ -25,6 +25,18 @@ class ScheduleController extends Controller
 
     public function store(StoreScheduleRequest $request)
 {
+    $exists = Schedule::where('nameEn', $request->nameEn)
+                      ->where('nameAr', $request->nameAr)
+                      ->first();
+
+    if ($exists) {
+        return $this->ApiResponse(
+            new ScheduleResource($exists->load('entries')),
+            'Schedule already exists',
+            200
+        );
+    }
+
     $schedule = Schedule::create([
         'nameEn' => $request->nameEn,
         'nameAr' => $request->nameAr,
@@ -37,7 +49,7 @@ class ScheduleController extends Controller
             'group_number'  => $entry['group_info']['group_number'],
             'total_groups'  => $entry['group_info']['total_groups'],
             'hall_id'       => $entry['hall_id'],
-            'lap_id'        => $entry['lab_id'],             // لاحظ: JSON فيه lab_id، والعمود اسمه lap_id
+            'lap_id'        => $entry['lab_id'],
             'lecturer_id'   => $entry['lecturer_id'],
             'Day'           => $entry['time_slot']['day'],
             'startTime'     => $entry['time_slot']['start_time'],

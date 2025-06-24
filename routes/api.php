@@ -54,36 +54,13 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 
-    Route::resource('/acadmic-spaces', AcadmicSpaceController::class)
-        ->middleware([
-            'index'   => 'can:view academic spaces',
-            'store'   => 'can:create academic space',
-            'show'    => 'can:show academic space',
-            'update'  => 'can:update academic space',
-            'destroy' => 'can:delete academic space',
-        ]);
 
-        Route::resource('/departments', DepartmentController::class)
-    ->middleware([
-        'index'   => 'can:view departments',
-        'store'   => 'can:create department',
-        'show'    => 'can:show department',
-        'update'  => 'can:update department',
-        'destroy' => 'can:delete department',
-    ]);
+        Route::resource('/departments', DepartmentController::class);
 
 
     Route::resource('/lecturers', LecturerController::class);
     
     
-    Route::resource('/courses', CourseController::class)
-    ->middleware([
-        'index'   => 'can:view courses',
-        'store'   => 'can:create course',
-        'show'    => 'can:show course',
-        'update'  => 'can:update course',
-        'destroy' => 'can:delete course',
-    ]);
     
     Route::resource('/academics', AcademicController::class);
     

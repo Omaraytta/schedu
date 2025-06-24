@@ -13,6 +13,7 @@ use App\Http\Controllers\LecturerController;
 use App\Http\Controllers\ManagementRoleController;
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\ScheduleExportController;
+use App\Http\Controllers\ScriptController;
 use App\Http\Controllers\StudyPlaneController;
 use App\Http\Controllers\TermPlansController;
 use Illuminate\Http\Request;
@@ -53,7 +54,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 
-Route::middleware('auth:sanctum')->group(function () {
     Route::resource('/acadmic-spaces', AcadmicSpaceController::class)
         ->middleware([
             'index'   => 'can:view academic spaces',
@@ -117,29 +117,42 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/academic-degrees', [AcademicDegreeController::class, 'index']);
 
    
-});
     Route::resource('/schedules' , ScheduleController::class);
     Route::get('/schedule/{id}/export-pdf', [ExportController::class, 'exportPdf']);
 Route::get('/schedule/{id}/preview', [ExportController::class, 'previewSchedule']);
 
-Route::get('/schedule/pdf', [ScheduleExportController::class, 'exportPdf']);
 
-// تصدير عام (بدون تصفية)
-Route::get('/export/pdf', [ScheduleExportController::class, 'exportPdf']);
-Route::get('/export/excel', [ScheduleExportController::class, 'exportExcel']);
-
-// تصدير جدول محاضر معين
-Route::get('/export/pdf/lecturer/{id}', [ScheduleExportController::class, 'exportPdfLecturer']);
-Route::get('/export/excel/lecturer/{id}', [ScheduleExportController::class, 'exportExcelLecturer']);
-
-// تصدير جدول قاعة معينة
-Route::get('/export/pdf/hall/{id}', [ScheduleExportController::class, 'exportPdfHall']);
-Route::get('/export/excel/hall/{id}', [ScheduleExportController::class, 'exportExcelHall']);
-
-// تصدير جدول معمل معين
-Route::get('/export/pdf/lab/{id}', [ScheduleExportController::class, 'exportPdfLab']);
-Route::get('/export/excel/lab/{id}', [ScheduleExportController::class, 'exportExcelLab']);
+Route::post('/script/run', [ScriptController::class, 'run']);
 
 
 
 
+    // روابط تصدير الجدول الكامل
+    Route::get('/schedule/export/schedule/{id}/pdf', [ScheduleExportController::class, 'exportPdfSchedule'])
+        ->name('export.schedule.pdf');
+    Route::get('/schedule/export/schedule/{id}/excel', [ScheduleExportController::class, 'exportExcelSchedule'])
+        ->name('export.schedule.excel');
+    
+    // روابط تصدير جدول المحاضرين
+    Route::get('/schedule/export/lecturer/{id}/pdf', [ScheduleExportController::class, 'exportPdfLecturer'])
+        ->name('export.lecturer.pdf');
+    Route::get('/schedule/export/lecturer/{id}/excel', [ScheduleExportController::class, 'exportExcelLecturer'])
+        ->name('export.lecturer.excel');
+    
+    // روابط تصدير جدول القاعات
+    Route::get('/schedule/export/hall/{id}/pdf', [ScheduleExportController::class, 'exportPdfHall'])
+        ->name('export.hall.pdf');
+    Route::get('/schedule/export/hall/{id}/excel', [ScheduleExportController::class, 'exportExcelHall'])
+        ->name('export.hall.excel');
+    
+    // روابط تصدير جدول المعامل
+    Route::get('/schedule/export/lab/{id}/pdf', [ScheduleExportController::class, 'exportPdfLab'])
+        ->name('export.lab.pdf');
+    Route::get('/schedule/export/lab/{id}/excel', [ScheduleExportController::class, 'exportExcelLab'])
+        ->name('export.lab.excel');
+    
+    // روابط تصدير جدول الأقسام
+    Route::get('/schedule/export/department/{id}/pdf', [ScheduleExportController::class, 'exportPdfDepartment'])
+        ->name('export.department.pdf');
+    Route::get('/schedule/export/department/{id}/excel', [ScheduleExportController::class, 'exportExcelDepartment'])
+        ->name('export.department.excel');

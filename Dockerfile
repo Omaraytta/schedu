@@ -33,7 +33,7 @@ COPY docker/php/php.ini /usr/local/etc/php/conf.d/app.ini
 WORKDIR /var/www/html
 
 COPY requirements.txt /tmp/requirements.txt
-RUN pip3 install --no-cache-dir -r /tmp/requirements.txt
+RUN pip3 install --no-cache-dir --break-system-packages -r /tmp/requirements.txt
 
 EXPOSE 80
 

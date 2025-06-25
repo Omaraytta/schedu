@@ -236,7 +236,10 @@ class ScheduleExportController extends Controller
         // عنوان الجدول
         $schedule = Schedule::select('nameAr')->find($scheduleId);
         $title = $schedule ? $schedule->nameAr : 'الجدول ' . $scheduleId;
-        
+        $tempDir = storage_path('app/mpdf-temp');
+        if (!file_exists($tempDir)) {
+            mkdir($tempDir, 0755, true);
+        }
         // إنشاء PDF
         $mpdf = new Mpdf([
             'mode' => 'utf-8',
@@ -247,7 +250,8 @@ class ScheduleExportController extends Controller
             'margin_right' => 10,
             'default_font' => 'dejavusans',
             'autoScriptToLang' => true,
-            'autoLangToFont' => true
+            'autoLangToFont' => true,
+            'tempDir' => $tempDir,
         ]);
     
         $mpdf->SetAutoPageBreak(true, 15);

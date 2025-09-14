@@ -1,133 +1,66 @@
-# SchedU
+<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
-SchedU is a scheduling web application built using **PHP Laravel**. It provides a structured way to manage and organize schedules efficiently.
+<p align="center">
+<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+</p>
 
-## 🚀 Technologies Used
-- 🐘 **PHP 8.x** (Laravel Framework)
-- 🌐 **Apache** (Web Server)
-- 🗄️ **MySQL** (Database)
-- 🐳 **Docker & Docker Compose** (Containerization)
+## About Laravel
 
-## 📂 Project Structure
-```
-SchedU/
-├── docker/
-│   ├── php/
-│   │   ├── Dockerfile  
-│   │   └── php.ini
-│   └── apache/
-│       └── 000-default.conf
-├── docker-compose.yml
-├── .env
-```
+Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
-## 🛠️ Setting Up the Project with Docker
+- [Simple, fast routing engine](https://laravel.com/docs/routing).
+- [Powerful dependency injection container](https://laravel.com/docs/container).
+- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
+- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
+- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
+- [Robust background job processing](https://laravel.com/docs/queues).
+- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
-To run the project using **Docker**, follow these steps:
+Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-### 1️⃣ Automated Setup (Recommended)
-You can run the setup script to automate the installation and setup process:
-```sh
-cd Schedu/
-./setup.sh
-```
-This will install **Docker & Docker Compose**, build the containers, install dependencies, set up the database, and configure permissions automatically.
+## Learning Laravel
 
----
+Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
 
-### 2️⃣ Manual Setup (Step-by-Step)
-If you prefer a manual setup, follow these steps:
+You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
 
-#### 🏗️ 2.1 Install Docker & Docker Compose
-Ensure **Docker** and **Docker Compose** are installed on your system. You can install them using:
+If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
 
-```sh
-# Install Docker
-sudo apt-get update
-sudo apt-get install docker.io
+## Laravel Sponsors
 
-# Install Docker Compose
-https://www.server-world.info/en/note?os=CentOS_Stream_9&p=docker&f=7```
+We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
 
-#### 🏗️ 2.2 Build and start the containers
-```sh
-docker-compose up -d --build
-```
-This command builds the Docker images and starts the containers in detached mode.
+### Premium Partners
 
-#### 📦 2.3 Install dependencies
-```sh
-docker-compose exec app composer install
-```
-Installs Laravel and project dependencies using **Composer** inside the running container.
+- **[Vehikl](https://vehikl.com/)**
+- **[Tighten Co.](https://tighten.co)**
+- **[WebReinvent](https://webreinvent.com/)**
+- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
+- **[64 Robots](https://64robots.com)**
+- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
+- **[Cyber-Duck](https://cyber-duck.co.uk)**
+- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
+- **[Jump24](https://jump24.co.uk)**
+- **[Redberry](https://redberry.international/laravel/)**
+- **[Active Logic](https://activelogic.com)**
+- **[byte5](https://byte5.de)**
+- **[OP.GG](https://op.gg)**
 
-#### 🔑 2.4 Generate the application key
-```sh
-docker-compose exec app php artisan key:generate --force
-```
-Generates a unique application key for Laravel, ensuring secure encryption.
+## Contributing
 
-#### 🗄️ 2.5 Run database migrations and seed the database
-```sh
-docker-compose exec app php artisan migrate --seed
-```
-Runs Laravel database migrations and seeds the database with initial data.
+Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
 
-#### 🔧 2.6 Set permissions for storage and cache
-```sh
-docker-compose exec app chmod -R 775 storage bootstrap/cache
-docker-compose exec app chown -R www-data:www-data storage bootstrap/cache
-```
-Sets appropriate permissions for the **storage** and **cache** directories to allow Laravel to function correctly.
+## Code of Conduct
 
-## 🌍 Accessing the Application
-Once the setup is complete, you can access the application via:
+In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
 
+## Security Vulnerabilities
 
-- 🖧 **On Guest VM:** [http://schedu.site:8000](http://schedu.site:8000)
+If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
-## ⚠️ Troubleshooting
-If you encounter any issues, check the following:
+## License
 
-### 🔍 1. Verify `.env` File Configuration
-Ensure the `.env` file is correctly configured, especially the database credentials:
-```sh
-db_connection=mysql
-db_host=mysql
-db_port=3306
-db_database=your_database_name
-db_username=your_username
-db_password=your_password
-```
-
-### 🛠️ 2. Check Database Connection
-Run the following command to check if the database container is running:
-```sh
-docker-compose ps
-```
-If the database is not running, restart it:
-```sh
-docker-compose restart mysql
-```
-
-### 🔐 3. Check SELinux (For CentOS/RHEL Users)
-If SELinux is enabled, it might block file access. Try setting permissive mode:
-```sh
-sudo setenforce 0
-```
-Or permanently disable it by editing `/etc/selinux/config` and setting:
-```sh
-SELINUX=permissive
-```
-
-### 🔥 4. Allow Docker in Firewall (For CentOS/RHEL Users)
-Ensure Docker services are allowed through the firewall:
-```sh
-sudo firewall-cmd --zone=public --add-masquerade --permanent
-sudo firewall-cmd --zone=public --add-service=docker --permanent
-sudo firewall-cmd --reload
-```
-
----
-This guide ensures a smooth setup of **SchedU** using Docker. 🚀
-
+The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).

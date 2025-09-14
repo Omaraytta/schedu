@@ -6,10 +6,14 @@ use App\Http\Controllers\AcadmicSpaceController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\ExportController;
 use App\Http\Controllers\HallController;
 use App\Http\Controllers\LapController;
 use App\Http\Controllers\LecturerController;
 use App\Http\Controllers\ManagementRoleController;
+use App\Http\Controllers\ScheduleController;
+use App\Http\Controllers\ScheduleExportController;
+use App\Http\Controllers\ScriptController;
 use App\Http\Controllers\StudyPlaneController;
 use App\Http\Controllers\TermPlansController;
 use Illuminate\Http\Request;
@@ -50,7 +54,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 
-Route::middleware('auth:sanctum')->group(function () {
     Route::resource('/acadmic-spaces', AcadmicSpaceController::class)
         ->middleware([
             'index'   => 'can:view academic spaces',
@@ -60,14 +63,7 @@ Route::middleware('auth:sanctum')->group(function () {
             'destroy' => 'can:delete academic space',
         ]);
 
-        Route::resource('/departments', DepartmentController::class)
-    ->middleware([
-        'index'   => 'can:view departments',
-        'store'   => 'can:create department',
-        'show'    => 'can:show department',
-        'update'  => 'can:update department',
-        'destroy' => 'can:delete department',
-    ]);
+        Route::resource('/departments', DepartmentController::class);
 
 
     Route::resource('/lecturers', LecturerController::class);
@@ -114,9 +110,19 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/academic-degrees', [AcademicDegreeController::class, 'index']);
 
    
-});
+    Route::resource('/schedules' , ScheduleController::class);
+    Route::get('/schedule/{id}/export-pdf', [ExportController::class, 'exportPdf']);
+Route::get('/schedule/{id}/preview', [ExportController::class, 'previewSchedule']);
+
+
+Route::post('/script/run', [ScriptController::class, 'run']);
 
 
 
 
+ // روابط التصدير مع الفلاتر المتعددة
+Route::post('/schedule/export/pdf', [ScheduleExportController::class, 'exportPdfWithFilters'])
+    ->name('export.pdf');
 
+Route::post('/schedule/export/excel', [ScheduleExportController::class, 'exportExcelWithFilters'])
+    ->name('export.excel');

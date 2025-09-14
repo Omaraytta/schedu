@@ -1,12 +1,15 @@
 FROM php:8.2-apache
 
 RUN apt-get update && apt-get install -y \
+    python3 \
+    python3-pip \
     libzip-dev \
     libpng-dev \
     libonig-dev \
     libxml2-dev \
     zip \
     unzip \
+    git \
     libssl-dev \
     && docker-php-ext-install pdo pdo_mysql zip mbstring exif pcntl bcmath gd opcache \
     && a2enmod rewrite
@@ -19,7 +22,7 @@ COPY . /var/www/html
 
 RUN echo "ServerName schedu.site" >> /etc/apache2/apache2.conf
 
-RUN composer install
+RUN composer install --no-interaction --prefer-dist --optimize-autoloader
 
 RUN chown -R www-data:www-data /var/www/html/storage \
     && chmod -R 775 /var/www/html/storage \
@@ -32,4 +35,3 @@ WORKDIR /var/www/html
 EXPOSE 80
 
 CMD ["apache2-foreground"]
-

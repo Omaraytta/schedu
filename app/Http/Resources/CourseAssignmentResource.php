@@ -15,11 +15,17 @@ class CourseAssignmentResource extends JsonResource
 
         return [
             'id' => $this->id ,
-            'course_id'               => $this->course_id,
+            'course_id'=> $this->course_id,
+            'courseCode'=> $this->course->code,
 
             'course' => $this->whenLoaded('course', function() use ($locale) {
-                return $locale === 'ar' ? $this->course->name_ar : $this->course->name_en;
+                return [ 'name' => $locale === 'ar' ? $this->course->name_ar : $this->course->name_en,
+                'nameEn' => $this->course->name_en,
+                'nameAr' => $this->course->name_ar,
+            
+            ];
             }),
+
             'lecture_groups'   => $this->lecture_groups,
             'lab_groups'       => $this->lab_groups,
             'is_common'        => (bool) $this->is_common,
